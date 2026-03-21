@@ -1,0 +1,18 @@
+{
+  "version": "1.0.0",
+  "tools": [
+    {
+      "name": "visit_about_page",
+      "description": "访问关于页面",
+      "parameters": {
+        "path": {
+          "type": "string",
+          "description": "页面路径"
+        },
+        "required": [
+          "path"
+        ]
+      }
+    }
+  ]
+}
