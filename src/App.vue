@@ -1,85 +1,114 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <header class="navbar-wrapper">
+    <nav class="navbar glass-card">
+      <div class="nav-brand">
+        <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="32" height="32" />
+        <span class="brand-name">AI Ready Web</span>
+      </div>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      <div class="nav-links">
+        <RouterLink to="/" class="nav-link">Home</RouterLink>
+        <RouterLink to="/about" class="nav-link">About</RouterLink>
+        <RouterLink to="/interest" class="nav-link">Calculator</RouterLink>
+      </div>
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
+      <div class="nav-actions">
+        <button class="btn-primary">Get Started</button>
+      </div>
+    </nav>
   </header>
 
-  <RouterView />
+  <main class="content-container">
+    <RouterView />
+  </main>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+.navbar-wrapper {
+  position: sticky;
+  top: 1.5rem;
+  z-index: 100;
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: center;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
   width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+  max-width: 1000px;
 }
 
-nav a.router-link-exact-active {
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand-name {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--primary);
+  letter-spacing: -0.025em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.nav-link {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
   color: var(--color-text);
+  transition: all 0.2s;
 }
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--primary);
 }
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+.nav-link.router-link-active {
+  color: var(--primary);
+  background-color: var(--color-background-mute);
 }
 
-nav a:first-of-type {
-  border: 0;
+.nav-actions {
+  display: none;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+.content-container {
+  padding-bottom: 4rem;
+}
+
+@media (min-width: 768px) {
+  .nav-actions {
+    display: block;
+  }
+}
+
+@media (max-width: 640px) {
+  .brand-name {
+    display: none;
   }
 
-  .logo {
-    margin: 0 2rem 0 0;
+  .navbar {
+    padding: 0.5rem 1rem;
   }
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
+  .nav-link {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
   }
 }
 </style>
