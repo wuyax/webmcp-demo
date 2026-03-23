@@ -1,42 +1,50 @@
-# ai-ready-web
+# AI-Ready Web: WebMCP Demonstration Project
 
-This template should help get you started developing with Vue 3 in Vite.
+This project is a technical demonstration of **WebMCP (Model Context Protocol for Web)**. While it features a functional Housing Provident Fund (公积金) interest calculator, its primary purpose is to showcase how AI agents can interact with, read from, and control a modern web application in real-time.
 
-## Recommended IDE Setup
+## 🌟 The WebMCP Vision
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+WebMCP allows an AI model to treat your web application as a set of structured tools. Instead of just "looking" at the page, the AI can:
+1.  **Read State**: Understand the current data inside your Vue/Pinia store.
+2.  **Execute Logic**: Trigger complex calculations or business rules defined in your code.
+3.  **Update UI**: Modify the application state, causing immediate reactive changes that the user can see.
 
-## Recommended Browser Setup
+## 🛠️ How it Works
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+The project integrates WebMCP through two layers:
 
-## Type Support for `.vue` Imports in TS
+### 1. The Reactive Core (Vue 3 + Pinia)
+The application state is centralized in `src/stores/interest.ts`. This ensures that when an AI tool modifies a value, the entire UI responds instantly through Vue's reactivity system.
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+### 2. The WebMCP Bridge (`src/assets/ai-tools/webmcp.ts`)
+We register specialized tools into the browser's `navigator.modelContext`, making them available to WebMCP-compatible AI agents:
 
-## Customize configuration
+*   **`getInterestCalculationState`**: Allows the AI to "peek" into the calculator to see what the user has entered and what the current results are.
+*   **`calculateInterest`**: A high-level tool that the AI calls to perform "What-if" analysis or help the user fill out the form using natural language.
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+## 🚀 Key Features Demonstrated
 
-## Project Setup
+-   **Natural Language Control**: "Set my balance to 50k and assume I deposit 2k monthly." The AI uses `calculateInterest` to manipulate the UI for the user.
+-   **Robust Data Handling**: The bridge includes logic to pad partial data (e.g., if the AI only provides 3 months of deposits, the code automatically fills the rest with 0).
+-   **Synchronized Context**: The AI always has access to the *real* results calculated by the app's internal logic, ensuring 100% accuracy in its responses.
 
+## 💻 Development Setup
+
+### Project Setup
 ```sh
 pnpm install
 ```
 
 ### Compile and Hot-Reload for Development
-
 ```sh
 pnpm dev
 ```
 
-### Type-Check, Compile and Minify for Production
-
+### Build for Production
 ```sh
 pnpm build
 ```
+
+---
+
+*Note: This project is intended for developers looking to understand the future of AI-native web applications.*
